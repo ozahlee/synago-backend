@@ -161,3 +161,11 @@ pledge numbers, receipts and certificate numbers are unique *within* a church. R
 - Set `FRONTEND_URL` (verification redirects) and a real `MAIL_MAILER` in production. In dev, mail goes to the log.
 - Dev seed: church "Saint James Wigua" (`admin@synago.test` / `password`) and platform owner `platform@synago.test` / `password`.
 
+### Dashboard
+
+| Endpoint | Notes |
+|---|---|
+| `GET dashboard` | headline figures. People figures need `members.view` and money figures `finance.view`; the rest come back as `null` |
+| `GET dashboard/attention` | "Needs attention": `{key, area, severity, title, detail, count, href}` for things the user can **act on**. Visitors, follow-ups, candidates, attendance and preachers need `members.manage`; welfare needs `welfare.manage`; missing offertory and unlinked categories need `finance.manage`; overdue pledges, budget and ledger warnings need `finance.view`; reminders and SMS budget need `sms.send`; unconfirmed staff need `users.manage`. Zero counts are left out |
+| `GET dashboard/sunday` | the latest Sunday per service (attendance and giving) vs the week before and the same Sunday last year, each part only for roles that may see it |
+

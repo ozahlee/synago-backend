@@ -76,6 +76,8 @@ Route::prefix('v1')->group(function () {
         Route::get('church', [ChurchController::class, 'show']);
         Route::post('church/onboarding', [ChurchController::class, 'completeOnboarding'])->middleware('permission:settings.manage');
 
+        Route::get('dashboard/attention', [DashboardController::class, 'attention']);
+        Route::get('dashboard/sunday', [DashboardController::class, 'sunday'])->middleware('permission:members.view|finance.view');
         Route::get('dashboard', DashboardController::class)->middleware('permission:members.view|finance.view');
         Route::get('search', SearchController::class)->middleware('throttle:120,1');
 
